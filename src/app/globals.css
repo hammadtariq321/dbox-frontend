@@ -2,32 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
+
+html {
+  scrollbar-color: #006a6a transparent; /* thumb color, track color */
+}
+
+.active-link {
+  background-color: #eeeeee;
+  font-weight: bold;
+}
+
+.active-link svg {
+  background-color: #eeeeee;
+  font-weight: bold;
+  color: black;
+}
+input {
+  border-color: #d1d5db !important;
+}
+input:focus {
+  outline: none;
+  box-shadow: none;
+  --tw-ring-color: transparent !important;
+  border-color: #8b8c8e !important;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: none;
+  --tw-ring-color: transparent !important;
+  border-color: #d1d5db !important;
+}
+
+input[type="checkbox"]:checked {
+  color: #008583;
+  --tw-ring-offset-width: 0px;
+}
+
+input[type="radio"]:checked {
+  color: #008583;
+  --tw-ring-offset-width: 0px;
+}
+
+input[type="checkbox"]:disabled {
+  color: gray;
+  --tw-ring-offset-width: 0px;
+}
+
+input[type="checkbox"]:focus {
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-shadow: none;
+}
+
+.button:hover .key-icon {
+  fill: white;
+  /* Change fill color on hover */
+}
+
+.client_detail_box {
+  background-color: #f9fafb;
+}
+
+.hide-scrollbar {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* Hide horizontal scrollbar */
+}
+
+.sc-lnsjTu.epZUJV svg {
+  display: none;
+}
+
