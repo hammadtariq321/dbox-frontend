@@ -1,7 +1,9 @@
 import React from "react";
 
 function DonationBox() {
-  return <div>DonationBox</div>;
+  return <>
+    <h1>Donation Box</h1>
+  </>
 }
 
 export default DonationBox;
