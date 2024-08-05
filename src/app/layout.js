@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import StoreProvider from "./StoreProvider";
 
 const inter = Poppins({
   subsets: ["latin"],
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Toaster position="top-right" reverseOrder={false} richColors />
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   );
 }
