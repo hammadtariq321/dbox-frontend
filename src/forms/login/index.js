@@ -11,16 +11,19 @@ import { getFirstError } from "@/helper/utils";
 
 const LoginForm = () => {
   const router = useRouter();
-  const handleSubmit = async (values, { resetForm }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const res = await axios.post(BASE_URL + "/token/", values);
-      console.log("🚀 ~ handleSubmit ~ res:", res);
+      localStorage.setItem("accessToken", res.data?.access);
+      localStorage.setItem("refreshToken", res.data?.refresh);
+      localStorage.setItem("userInfo", JSON.stringify(res.data?.user_info));
       toast.success("Login successful");
-
-      // router.push("/dashboard");
+      resetForm();
+      router.push("/dashboard");
     } catch (error) {
-      console.log("🚀 ~ handleSubmit ~ error:", error);
       toast.error(getFirstError(error.response.data) || error.message);
+    } finally {
+      setSubmitting(false);
     }
   };
   return (
@@ -29,7 +32,7 @@ const LoginForm = () => {
       validationSchema={loginValidationSchema}
       onSubmit={handleSubmit}
     >
-      {({ touched, errors }) => (
+      {({ errors, isSubmitting }) => (
         <Form>
           <div className="mb-4">
             <label
@@ -61,10 +64,15 @@ const LoginForm = () => {
             <ErrorMessage error={errors.password} />
           </div>
           <button
+            disabled={isSubmitting}
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700"
+            className={`w-full ${
+              isSubmitting
+                ? "cursor-not-allowed bg-gray-500"
+                : "bg-blue-600 hover:bg-blue-700"
+            } text-white py-2 px-4 rounded-md `}
           >
-            Login
+            {isSubmitting ? "Submitting..." : "Login"}
           </button>
         </Form>
       )}
