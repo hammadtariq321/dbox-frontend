@@ -10,13 +10,24 @@
 
 
 html {
-  scrollbar-color: #006a6a transparent; /* thumb color, track color */
+  scrollbar-color: #006a6a transparent;
+  /* thumb color, track color */
+}
+
+
+.sidebar-link svg {
+  color: #6d6d6d;
 }
 
 .active-link {
   background-color: #eeeeee;
+<<<<<<< HEAD
   font-weight: bold;
   color: black;
+=======
+  font-weight: 600;
+
+>>>>>>> ba6f1cd08b7ac9b0a8647d7793ea2be524e701c9
 }
 
 .active-link svg {
@@ -24,9 +35,11 @@ html {
   font-weight: bold;
   color: black;
 }
+
 input {
   border-color: #d1d5db !important;
 }
+
 input:focus {
   outline: none;
   box-shadow: none;
@@ -79,4 +92,3 @@ input[type="checkbox"]:focus {
 .sc-lnsjTu.epZUJV svg {
   display: none;
 }
-
