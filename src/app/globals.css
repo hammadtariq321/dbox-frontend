@@ -21,13 +21,8 @@ html {
 
 .active-link {
   background-color: #eeeeee;
-<<<<<<< HEAD
-  font-weight: bold;
-  color: black;
-=======
   font-weight: 600;
 
->>>>>>> ba6f1cd08b7ac9b0a8647d7793ea2be524e701c9
 }
 
 .active-link svg {
