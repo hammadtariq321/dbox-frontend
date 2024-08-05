@@ -16,6 +16,7 @@ html {
 .active-link {
   background-color: #eeeeee;
   font-weight: bold;
+  color: black;
 }
 
 .active-link svg {

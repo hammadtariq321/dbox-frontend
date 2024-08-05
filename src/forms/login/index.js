@@ -5,13 +5,23 @@ import React from "react";
 import { loginInitialValues, loginValidationSchema } from "./form-config";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import axios from "axios";
+import { BASE_URL } from "@/helper/constants";
+import { getFirstError } from "@/helper/utils";
 
 const LoginForm = () => {
   const router = useRouter();
-  const handleSubmit = (values) => {
-    console.log("Login successful", values);
-    toast.success("Login successful");
-    router.push("/dashboard");
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      const res = await axios.post(BASE_URL + "/token/", values);
+      console.log("🚀 ~ handleSubmit ~ res:", res);
+      toast.success("Login successful");
+
+      // router.push("/dashboard");
+    } catch (error) {
+      console.log("🚀 ~ handleSubmit ~ error:", error);
+      toast.error(getFirstError(error.response.data) || error.message);
+    }
   };
   return (
     <Formik
@@ -23,22 +33,17 @@ const LoginForm = () => {
         <Form>
           <div className="mb-4">
             <label
-              htmlFor="username"
+              htmlFor="phone_number"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              Phone Number
             </label>
             <Field
-              type="text"
-              id="email"
-              name="email"
-              className={`mt-1 block w-full px-3 py-2 border ${
-                touched.email && errors.email
-                  ? "border-red-500"
-                  : "border-gray-300"
-              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+              id="phone_number"
+              name="phone_number"
+              className={`mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
             />
-            <ErrorMessage error={errors.email} />
+            <ErrorMessage error={errors.phone_number} />
           </div>
           <div className="mb-6">
             <label
@@ -51,11 +56,7 @@ const LoginForm = () => {
               type="password"
               id="password"
               name="password"
-              className={`mt-1 block w-full px-3 py-2 border ${
-                touched.password && errors.password
-                  ? "border-red-500"
-                  : "border-gray-300"
-              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+              className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
             />
             <ErrorMessage error={errors.password} />
           </div>
