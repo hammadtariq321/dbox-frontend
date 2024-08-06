@@ -8,15 +8,16 @@ import { toast } from "sonner";
 import axios from "axios";
 import { BASE_URL } from "@/helper/constants";
 import { getFirstError } from "@/helper/utils";
+import { setCookie } from "cookies-next";
 
 const LoginForm = () => {
   const router = useRouter();
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
       const res = await axios.post(BASE_URL + "/token/", values);
-      localStorage.setItem("accessToken", res.data?.access);
-      localStorage.setItem("refreshToken", res.data?.refresh);
-      localStorage.setItem("userInfo", JSON.stringify(res.data?.user_info));
+      setCookie("accessToken", res.data?.access);
+      setCookie("refreshToken", res.data?.refresh);
+      setCookie("userInfo", JSON.stringify(res.data?.user_info));
       toast.success("Login successful");
       resetForm();
       router.push("/dashboard");

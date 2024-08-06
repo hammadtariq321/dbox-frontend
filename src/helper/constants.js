@@ -12,3 +12,9 @@ export const PASSWORD_REGEX =
 
 export const BASE_URL =
   "https://donation-box-30e4e1a68d46.herokuapp.com/api/v1";
+
+export const Gender_OPTIONS = [
+  { value: "male", label: "Male" },
+  { value: "female", label: "Female" },
+  { value: "other", label: "Other" },
+];
