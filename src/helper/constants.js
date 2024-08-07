@@ -11,7 +11,7 @@ export const PASSWORD_REGEX =
   /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[=!@#$%^&*()_+[\]{};':"\\|,.<>/?]).*$/;
 
 export const BASE_URL =
-  "https://donation-box-30e4e1a68d46.herokuapp.com/api/v1";
+  process.env.BASE_URL || process.env.NEXT_PUBLIC_BASE_URL;
 
 export const Gender_OPTIONS = [
   { value: "male", label: "Male" },

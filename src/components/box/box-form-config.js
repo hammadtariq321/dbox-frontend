@@ -1,6 +1,5 @@
 import * as Yup from "yup";
 export const boxInitialValues = {
-  id: "", // Read-only, no input needed
   mobile_number: "",
   name: "",
   province: "",
@@ -8,7 +7,7 @@ export const boxInitialValues = {
   area: "",
   complete_address: "",
   gender: "",
-  image: "", // Read-only, no input needed
+  image: null, // Read-only, no input needed
 };
 
 export const boxValidationSchema = Yup.object({

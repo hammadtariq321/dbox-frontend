@@ -1,26 +1,21 @@
 import axios from "axios";
+import { getCookie } from "cookies-next";
+import { BASE_URL } from "../constants";
 
-const API_URL = "https://your-api-url.com"; // Replace with your API URL
-
-// Create an Axios instance
-const axiosInstance = axios.create({
-  baseURL: API_URL,
+const axiosClientInstance = axios.create({
+  baseURL: BASE_URL,
+  timeout: 60000,
 });
 
-// Function to get access token from localStorage
-const getAccessToken = () => localStorage.getItem("accessToken");
+const getAccessToken = () => getCookie("accessToken");
+const getRefreshToken = () => getCookie("refreshToken");
 
-// Function to get refresh token from localStorage
-const getRefreshToken = () => localStorage.getItem("refreshToken");
-
-// Function to save tokens to localStorage
 const saveTokens = (accessToken, refreshToken) => {
-  localStorage.setItem("accessToken", accessToken);
-  localStorage.setItem("refreshToken", refreshToken);
+  cookies().set("accessToken", accessToken);
+  cookies().set("refreshToken", refreshToken);
 };
 
-// Request interceptor to add the access token to headers
-axiosInstance.interceptors.request.use(
+axiosClientInstance.interceptors.request.use(
   (config) => {
     const token = getAccessToken();
     if (token) {
@@ -31,7 +26,6 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Function to refresh the access token
 const refreshAccessToken = async () => {
   try {
     const refreshToken = getRefreshToken();
@@ -39,7 +33,7 @@ const refreshAccessToken = async () => {
       throw new Error("No refresh token available");
     }
 
-    const response = await axios.post(`${API_URL}/refresh-token`, {
+    const response = await axios.post(`/refresh-token/`, {
       refreshToken,
     });
     const { accessToken, newRefreshToken } = response.data;
@@ -53,8 +47,8 @@ const refreshAccessToken = async () => {
   }
 };
 
-// Response interceptor to handle expired access token
-axiosInstance.interceptors.response.use(
+// Add a response interceptor to handle timeout
+axiosClientInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
@@ -77,4 +71,4 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export default axiosInstance;
+export default axiosClientInstance;

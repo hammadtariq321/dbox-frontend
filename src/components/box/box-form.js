@@ -1,14 +1,41 @@
 "use client";
-import { Field, Form, Formik } from "formik";
-import ErrorMessage from "../error-message";
+import { Form, Formik } from "formik";
 import { boxInitialValues, boxValidationSchema } from "./box-form-config";
-import SelectField from "./select-box";
-import { Gender_OPTIONS } from "@/helper/constants";
+import { BUTTON_VARIANT, Gender_OPTIONS } from "@/helper/constants";
+import Button from "../button";
+import InputLabel from "../input-label";
+import FormInput from "../form-input";
+import FormSelectBox from "../form-select-box";
+import FileInputField from "../file-input-field";
+import axiosInstance from "@/helper/axios";
+import { toast } from "sonner";
+import { getFirstError } from "@/helper/utils";
+import { useRouter } from "next/navigation";
 
 const BoxForm = () => {
-  const handleSubmit = (values) => {
+  const router = useRouter();
+  const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     console.log("Form values:", values);
-    // Handle form submission
+    try {
+      await axiosInstance.post("/box/", values, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      toast.success("Box created successfully");
+      resetForm();
+      router.refresh();
+      router.push("/boxes");
+    } catch (error) {
+      toast.error(
+        getFirstError(
+          error?.response?.data ||
+            "Something went wrong while submitting data..."
+        )
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -17,147 +44,69 @@ const BoxForm = () => {
       validationSchema={boxValidationSchema}
       onSubmit={handleSubmit}
     >
-      {({ errors, form, isSubmitting }) => (
-        <Form>
-          <div className="flex gap-3">
+      {({ errors, isSubmitting }) => (
+        <Form className="mt-5">
+          {/* First Row */}
+          <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Name
-              </label>
-              <Field
-                id="name"
-                name="name"
-                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-
-              <ErrorMessage error={errors?.name} />
+              <FormInput name="name" label="Name" errors={errors} />
             </div>
-
             <div className="flex-1">
-              <label
-                htmlFor="gender"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Gender
-              </label>
-              <SelectField
-                form={form}
-                options={Gender_OPTIONS}
-                id="gender"
+              <FormSelectBox
                 name="gender"
-                placeholder="Gender"
+                label="Gender"
+                errors={errors}
+                options={Gender_OPTIONS}
               />
-              <ErrorMessage error={errors?.gender} />
             </div>
           </div>
 
-          <div className="flex gap-3">
+          {/* Second Row */}
+          <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <label
-                htmlFor="province"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Province
-              </label>
-              <Field
-                id="province"
-                name="province"
-                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-              <ErrorMessage error={errors?.province} />
+              <FormInput name="province" label="Province" errors={errors} />
             </div>
             <div className="flex-1">
-              <label
-                htmlFor="city"
-                className="block text-sm font-medium text-gray-700"
-              >
-                City
-              </label>
-              <Field
-                id="city"
-                name="city"
-                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-              <ErrorMessage error={errors?.city} />
+              <FormInput name="city" label="City" errors={errors} />
             </div>
           </div>
 
-          <div className="flex gap-3">
+          {/* Third Row */}
+          <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <label
-                htmlFor="area"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Area
-              </label>
-              <Field
-                id="area"
-                name="area"
-                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-              <ErrorMessage error={errors?.area} />
+              <FormInput name="area" label="Area" errors={errors} />
             </div>
             <div className="flex-1">
-              <label
-                htmlFor="mobile_number"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Mobile Number
-              </label>
-              <Field
-                id="mobile_number"
+              <FormInput
                 name="mobile_number"
-                className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                label="Mobile Number"
+                errors={errors}
               />
-              <ErrorMessage error={errors?.mobile_number} />
             </div>
           </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="complete_address"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Complete Address
-            </label>
-            <Field
-              id="complete_address"
+          {/* Fourth Row */}
+          <div className="mb-2">
+            <FormInput
               name="complete_address"
-              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              label="Complete Address"
+              errors={errors}
             />
-            <ErrorMessage error={errors?.complete_address} />
           </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="image"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Image (Read-Only)
-            </label>
-            <Field
-              id="image"
-              name="image"
-              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              disabled
-            />
-            {/* No validation or error message needed for read-only field */}
-          </div>
+          {/* <div className="mb-2">
+            <InputLabel name="image" label="Image" />
+            <FileInputField id="image" name="image" />
+          </div> */}
 
-          <button
-            disabled={isSubmitting}
-            type="submit"
-            className={`w-full ${
-              isSubmitting
-                ? "cursor-not-allowed bg-gray-500"
-                : "bg-blue-600 hover:bg-blue-700"
-            } text-white py-2 px-4 rounded-md`}
-          >
-            {isSubmitting ? "Submitting..." : "Submit"}
-          </button>
+          <div className="flex justify-end items-center gap-3 mt-5">
+            <Button disabled={isSubmitting} className="px-3" type="submit">
+              {isSubmitting ? "Submitting..." : "Submit"}
+            </Button>
+            <Button variant={BUTTON_VARIANT.SECONDARY} className="px-3">
+              Cancel
+            </Button>
+          </div>
         </Form>
       )}
     </Formik>
