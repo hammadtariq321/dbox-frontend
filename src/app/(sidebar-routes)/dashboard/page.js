@@ -2,31 +2,34 @@ import PageHeading from "@/components/page-heading";
 import React from "react";
 import { LuCalendarDays } from "react-icons/lu";
 import { FaRegCalendarCheck, FaRegCalendarMinus } from "react-icons/fa";
+import { fetchTransactionTotal } from "@/actions/dashboard-actions";
 
-function DashboardPage() {
+async function DashboardPage() {
+  const transactions = await fetchTransactionTotal()
+  console.log(transactions)
   return (
     <>
       <PageHeading title="Dashboard" />
-      <div className="mt-10 flex justify-between gap-5">
+      <div className="mt-10 flex flex-col justify-between gap-5 md:flex-row">
         <div className=" p-5 w-full rounded border hover:shadow cursor-pointer">
           <div className="bg-gray-100 h-[50px] w-[50px] flex items-center justify-center rounded-full">
-            <LuCalendarDays />
+            <LuCalendarDays size={20} />
           </div>
-          <p className="font-bold text-xl mt-5 text-gray-700">Rs 500</p>
-          <p className="text-xs">Today</p>
+          <p className="font-bold text-xl mt-5 text-gray-700">Rs {transactions?.total_amount}</p>
+          <p className="text-xs">Total Amount</p>
         </div>
         <div className=" p-5 w-full rounded border hover:shadow cursor-pointer">
           <div className="bg-gray-100 h-[50px] w-[50px] flex items-center justify-center rounded-full">
-            <FaRegCalendarCheck />
+            <FaRegCalendarCheck size={20} />
           </div>
-          <p className="font-bold text-xl mt-5 text-gray-700">Rs 25,000</p>
+          <p className="font-bold text-xl mt-5 text-gray-700">Rs {transactions?.current_month_total}</p>
           <p className="text-xs">Current Month</p>
         </div>
         <div className=" p-5 w-full rounded border hover:shadow cursor-pointer">
           <div className="bg-gray-100 h-[50px] w-[50px] flex items-center justify-center rounded-full">
-            <FaRegCalendarMinus />
+            <FaRegCalendarMinus size={20} />
           </div>
-          <p className="font-bold text-xl mt-5 text-gray-700">Rs 7,200</p>
+          <p className="font-bold text-xl mt-5 text-gray-700">Rs {transactions?.previous_month_total}</p>
           <p className="text-xs">Previous Month</p>
         </div>
       </div>
