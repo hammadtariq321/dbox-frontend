@@ -30,7 +30,7 @@ const BoxForm = () => {
       toast.error(
         getFirstError(
           error?.response?.data ||
-            "Something went wrong while submitting data..."
+          "Something went wrong while submitting data..."
         )
       );
     } finally {
@@ -94,10 +94,10 @@ const BoxForm = () => {
             />
           </div>
 
-          {/* <div className="mb-2">
-            <InputLabel name="image" label="Image" />
+          <div className="mb-2">
+            <InputLabel name="image" label="Upload Image" />
             <FileInputField id="image" name="image" />
-          </div> */}
+          </div>
 
           <div className="flex justify-end items-center gap-3 mt-5">
             <Button disabled={isSubmitting} className="px-3" type="submit">
