@@ -17,7 +17,7 @@ const TableSearchField = () => {
     replace(`${pathname}?${params.toString()}`);
   }, 300);
   return (
-    <div className="flex justify-end mt-10">
+    <div className="flex justify-end">
       <input
         className="input-field"
         style={{ width: "300px" }}

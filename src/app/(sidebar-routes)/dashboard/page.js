@@ -11,21 +11,21 @@ async function DashboardPage() {
     <>
       <PageHeading title="Dashboard" />
       <div className="mt-10 flex flex-col justify-between gap-5 md:flex-row">
-        <div className=" p-5 w-full rounded border hover:shadow cursor-pointer">
+        <div className=" p-5 w-full rounded border bg-white hover:shadow cursor-pointer">
           <div className="bg-gray-100 h-[50px] w-[50px] flex items-center justify-center rounded-full">
             <LuCalendarDays size={20} />
           </div>
           <p className="font-bold text-xl mt-5 text-gray-700">Rs {transactions?.total_amount}</p>
           <p className="text-xs">Total Amount</p>
         </div>
-        <div className=" p-5 w-full rounded border hover:shadow cursor-pointer">
+        <div className=" p-5 w-full rounded border bg-white hover:shadow cursor-pointer">
           <div className="bg-gray-100 h-[50px] w-[50px] flex items-center justify-center rounded-full">
             <FaRegCalendarCheck size={20} />
           </div>
           <p className="font-bold text-xl mt-5 text-gray-700">Rs {transactions?.current_month_total}</p>
           <p className="text-xs">Current Month</p>
         </div>
-        <div className=" p-5 w-full rounded border hover:shadow cursor-pointer">
+        <div className=" p-5 w-full rounded border bg-white hover:shadow cursor-pointer">
           <div className="bg-gray-100 h-[50px] w-[50px] flex items-center justify-center rounded-full">
             <FaRegCalendarMinus size={20} />
           </div>

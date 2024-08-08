@@ -13,7 +13,7 @@ async function DonationBox({ searchParams }) {
   const boxlists = await fetchBoxDetails(query, currentPage);
   return (
     <>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center bg-white p-5 mb-5 rounded">
         <PageHeading title={"Donation Box List"} />
         <Link
           href="/box/add"
@@ -23,10 +23,12 @@ async function DonationBox({ searchParams }) {
         </Link>
       </div>
 
-      <TableSearchField />
-      <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
-        <BoxTableView data={boxlists} />
-      </Suspense>
+      <div className="bg-white p-5 rounded">
+        <TableSearchField />
+        <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
+          <BoxTableView data={boxlists} />
+        </Suspense>
+      </div>
     </>
   );
 }
