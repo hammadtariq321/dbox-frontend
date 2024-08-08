@@ -15,7 +15,7 @@ async function DonationBox() {
         <PageHeading title={"Donation Box List"} />
         <Link
           href="/boxes/add"
-          className="bg-green-600 text-white px-4 py-3 rounded shadow flex items-center text-xs hover:bg-green-700"
+          className="bg-primary text-white px-4 py-3 rounded shadow flex items-center text-xs hover:bg-primary-hover"
         >
           <LuPlus size={15} className="mr-2" /> Add New Box
         </Link>
