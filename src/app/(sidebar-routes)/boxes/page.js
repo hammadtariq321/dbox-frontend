@@ -21,7 +21,7 @@ async function DonationBox() {
         </Link>
       </div>
 
-      <BoxTableView data={boxlists} />
+      <BoxTableView data={boxlists} handlePageChange={boxlists} />
     </>
   );
 }
