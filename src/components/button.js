@@ -31,7 +31,7 @@ const Button = ({
     <button
       type="button"
       className={clsx(
-        "rounded-md px-1.5 py-2.5 transform transition duration-300 ease-in-out text-sm font-biennale font-medium",
+        "rounded-md px-7 py-2.5  transform transition duration-300 ease-in-out text-sm font-biennale font-medium",
         variantClasses,
         className
       )}
