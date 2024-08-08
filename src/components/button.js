@@ -5,13 +5,13 @@ import { BUTTON_VARIANT } from "@/helper/constants";
 const getVariant = (variant) => {
   switch (variant) {
     case BUTTON_VARIANT.PRIMARY:
-      return "bg-secondary text-white hover:bg-primary";
-    case BUTTON_VARIANT.SUCCESS:
       return "bg-primary text-white hover:bg-primary-hover";
-    case BUTTON_VARIANT.DANGER:
-      return "bg-red-500 text-white hover:bg-primary";
     case BUTTON_VARIANT.SECONDARY:
-      return "bg-gray-500 text-white hover:bg-primary";
+      return "bg-secondary text-black hover:bg-secondary-hover";
+    case BUTTON_VARIANT.SUCCESS:
+      return "bg-success text-white hover:bg-success-hover";
+    case BUTTON_VARIANT.DANGER:
+      return "bg-red-500 text-white hover:bg-red-700";
     case BUTTON_VARIANT.OUTLINE:
       return "border border-primary bg-white text-primary hover:border-primary hover:bg-primary hover:text-white";
     default:

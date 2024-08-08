@@ -14,7 +14,7 @@ const FileInputField = ({ name, label, multiple = false, ...props }) => {
   };
 
   return (
-    <Field
+    <input
       type="file"
       className="mt-1 block w-full text-xs text-gray-500
     file:mr-4 file:py-2 file:px-4

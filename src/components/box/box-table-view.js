@@ -2,19 +2,17 @@
 import React from "react";
 import DataTableView from "../data-table-view";
 import { box_columns } from "./box-columns";
-import ColumnActionButton from "../column-action-button";
+//  /?page=1
 
-const BoxTableView = ({ data }) => {
-  const columns = [
-    ...box_columns,
-    {
-      name: "Action",
-      selector: (row) => (
-        <ColumnActionButton className="bg-primary">Edit</ColumnActionButton>
-      ),
-    },
-  ];
-  return <DataTableView columns={columns} data={data} className="mt-10" />;
+const BoxTableView = ({ data, handlePageChange }) => {
+  return (
+    <DataTableView
+      columns={box_columns}
+      data={data}
+      handlePageChange={handlePageChange}
+      className="mt-10"
+    />
+  );
 };
 
 export default BoxTableView;
