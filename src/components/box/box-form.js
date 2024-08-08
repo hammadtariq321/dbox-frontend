@@ -30,7 +30,7 @@ const BoxForm = () => {
       toast.error(
         getFirstError(
           error?.response?.data ||
-          "Something went wrong while submitting data..."
+            "Something went wrong while submitting data..."
         )
       );
     } finally {
@@ -103,7 +103,11 @@ const BoxForm = () => {
             <Button disabled={isSubmitting} className="px-3" type="submit">
               {isSubmitting ? "Submitting..." : "Submit"}
             </Button>
-            <Button variant={BUTTON_VARIANT.SECONDARY} className="px-3">
+            <Button
+              variant={BUTTON_VARIANT.SECONDARY}
+              onClick={() => router.push("/box")}
+              className="px-3"
+            >
               Cancel
             </Button>
           </div>

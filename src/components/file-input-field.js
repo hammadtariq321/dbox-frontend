@@ -20,8 +20,8 @@ const FileInputField = ({ name, label, multiple = false, ...props }) => {
     file:mr-4 file:py-2 file:px-4
     file:rounded-full file:border-0
     file:text-xs file:font-semibold
-    file:bg-blue-50 file:text-blue-700
-    hover:file:bg-blue-100"
+    file:bg-blue-50 file:text-primary
+    hover:file:bg-blue-100 cursor-pointer"
       onChange={handleChange}
       {...props}
     />
