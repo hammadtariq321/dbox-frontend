@@ -34,12 +34,11 @@ function Sidebar() {
       icon: <GrUserWorker />,
     },
     {
-      href: "/boxes",
+      href: "/box",
       label: "Box List",
-      page: "boxes",
+      page: "box",
       icon: <FiBox />,
     },
-
   ];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -76,8 +75,9 @@ function Sidebar() {
 
       <aside
         id="logo-sidebar"
-        className={`fixed top-0 left-0 z-50 w-64 h-screen transition-transform sm:translate-x-0 ${isOpen ? "" : "-translate-x-full" // Add conditional class to control sidebar visibility
-          }`}
+        className={`fixed top-0 left-0 z-50 w-64 h-screen transition-transform sm:translate-x-0 ${
+          isOpen ? "" : "-translate-x-full" // Add conditional class to control sidebar visibility
+        }`}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
@@ -94,8 +94,9 @@ function Sidebar() {
               <li key={index} className="sidebar-link">
                 <Link
                   href={link.href}
-                  className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${selectedPath === link.page ? "active-link " : ""
-                    }`}
+                  className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                    selectedPath === link.page ? "active-link " : ""
+                  }`}
                 >
                   {link.icon}
                   <span className="ms-3">{link.label}</span>
