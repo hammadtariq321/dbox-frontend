@@ -1,4 +1,4 @@
-import { fetchBoxDetails } from "@/actions/box-action";
+import { getAllBoxes } from "@/actions/box-action";
 import BoxTableView from "@/components/box/box-table-view";
 import PageHeading from "@/components/page-heading";
 import TableSearchField from "@/components/table-search-field";
@@ -10,7 +10,7 @@ async function DonationBox({ searchParams }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
 
-  const boxlists = await fetchBoxDetails(query, currentPage);
+  const boxlists = await getAllBoxes(query, currentPage);
   return (
     <>
       <div className="flex justify-between items-center">

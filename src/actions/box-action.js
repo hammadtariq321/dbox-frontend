@@ -1,14 +1,23 @@
 "use server";
 
-import axiosServerInstance from "@/helper/axios/axios-server-instance";
+import axiosInstance from "@/helper/axios";
 
-export async function fetchBoxDetails(query = "", page) {
+export async function getAllBoxes(query = "", page) {
   try {
-    const response = await axiosServerInstance.get(
+    const response = await axiosInstance.get(
       `/box/?search=${query}&page=${page}`
     );
     return response.data;
   } catch (error) {
-    console.log("🚀 ~ fetchBoxDetails ~ error:", error);
+    console.log("🚀 ~ getAllBoxes ~ error:", error);
+  }
+}
+
+export async function getBoxById(id) {
+  try {
+    const response = await axiosInstance.get(`/box/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log("🚀 ~ getAllBoxes ~ error:", error);
   }
 }

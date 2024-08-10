@@ -3,15 +3,13 @@ import axios from "axios";
 import { cookies } from "next/headers";
 import { BASE_URL } from "../constants";
 
-const cookieStore = cookies();
-
 const axiosServerInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 60000,
 });
 
-const getAccessToken = () => cookieStore.get("accessToken")?.value;
-const getRefreshToken = () => cookieStore.get("refreshToken")?.value;
+const getAccessToken = () => cookies().get("accessToken")?.value;
+const getRefreshToken = () => cookies().get("refreshToken")?.value;
 
 const saveTokens = (accessToken, refreshToken) => {
   cookies().set("accessToken", accessToken);
