@@ -1,15 +1,14 @@
 "use client";
 import { useState } from "react";
 import DataTableView from "../data-table-view";
+import { box_columns } from "./box-columns";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ConfirmationModal from "../modal/confirmation-modal";
 import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
-import { transaction_columns } from "../transactions/transaction-columns";
 
 const BoxTableView = ({ data }) => {
-  console.log("🚀 ~ BoxTableView ~ data:", data);
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [selectedRowID, setSelectedRowID] = useState(null);
@@ -40,7 +39,7 @@ const BoxTableView = ({ data }) => {
     cell: (row) => (
       <div className="flex space-x-2">
         <button
-          onClick={() => router.push(`/transaction/edit/${row?.id}`)}
+          onClick={() => router.push(`/box/edit/${row?.id}`)}
           className="text-primary hover:text-primary-hover "
         >
           <FaEdit size={18} />
@@ -58,7 +57,7 @@ const BoxTableView = ({ data }) => {
     button: true,
   };
 
-  const columns = [...transaction_columns, actionColumn];
+  const columns = [...box_columns, actionColumn];
 
   return (
     <>

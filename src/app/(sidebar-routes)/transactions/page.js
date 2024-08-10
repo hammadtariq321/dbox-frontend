@@ -1,12 +1,35 @@
+import { getAllTransactions } from "@/actions/transaction-actions";
+import BoxTableView from "@/components/box/box-table-view";
 import PageHeading from "@/components/page-heading";
-import React from "react";
+import TableSearchField from "@/components/table-search-field";
+import Link from "next/link";
+import React, { Suspense } from "react";
+import { LuPlus } from "react-icons/lu";
 
-function Transactions() {
+async function DonationBox({ searchParams }) {
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+
+  const transactionList = await getAllTransactions(query, currentPage);
+  console.log("🚀 ~ DonationBox ~ transactionList:", transactionList);
   return (
     <>
-      <PageHeading title="Transactions" />
+      <div className="flex justify-between items-center">
+        <PageHeading title="Transactions List" />
+        <Link
+          href="/transaction/add"
+          className="bg-primary text-white px-4 py-3 rounded shadow flex items-center text-xs hover:bg-primary-hover"
+        >
+          <LuPlus size={15} className="mr-2" /> Add New Transaction
+        </Link>
+      </div>
+
+      <TableSearchField />
+      <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
+        <BoxTableView data={transactionList} />
+      </Suspense>
     </>
   );
 }
 
-export default Transactions;
+export default DonationBox;
