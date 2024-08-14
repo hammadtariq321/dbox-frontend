@@ -2,7 +2,7 @@
 import { useState } from "react";
 import DataTableView from "../data-table-view";
 import { box_columns } from "./box-columns";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ConfirmationModal from "../modal/confirmation-modal";
 import axiosInstance from "@/helper/axios";
@@ -29,7 +29,7 @@ const BoxTableView = ({ data }) => {
       console.log("🚀 ~ handleConfirmDelete ~ error:", error);
       toast.error(
         error?.response?.data?.message ||
-          "Something went wrong while deleting the box"
+        "Something went wrong while deleting the box"
       );
     }
   };
@@ -38,6 +38,12 @@ const BoxTableView = ({ data }) => {
     name: "Actions",
     cell: (row) => (
       <div className="flex space-x-2">
+        <button
+          onClick={() => router.push(`/box/view/${row.id}`)}
+          className="text-gray-700 "
+        >
+          <FaEye size={18} />
+        </button>
         <button
           onClick={() => router.push(`/box/edit/${row.id}`)}
           className="text-primary hover:text-primary-hover "
