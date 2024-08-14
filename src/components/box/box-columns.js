@@ -25,7 +25,7 @@ export const box_columns = [
     sortable: true,
   },
   {
-    name: "Complete Address",
+    name: "Address",
     selector: (row) => row.complete_address,
     sortable: true,
   },
