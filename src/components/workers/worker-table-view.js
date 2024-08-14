@@ -39,7 +39,7 @@ const WorkerTableView = ({ data }) => {
     cell: (row) => (
       <div className="flex space-x-2">
         <button
-          onClick={() => router.push(`/box/edit/${row.id}`)}
+          onClick={() => router.push(`/workers/edit/${row.id}`)}
           className="text-primary hover:text-primary-hover "
         >
           <FaEdit size={18} />

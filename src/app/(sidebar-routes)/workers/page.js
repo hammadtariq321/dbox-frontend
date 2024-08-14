@@ -18,7 +18,7 @@ async function WorkersPage({ searchParams }) {
       <div className="flex justify-between items-center">
         <PageHeading title={"Workers List"} />
         <Link
-          href="/box/add"
+          href="/workers/add"
           className="bg-primary text-white px-4 py-3 rounded shadow flex items-center text-xs hover:bg-primary-hover"
         >
           <LuPlus size={15} className="mr-2" /> Add Worker

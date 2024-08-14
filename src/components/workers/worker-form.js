@@ -1,6 +1,6 @@
 "use client";
 import { Form, Formik } from "formik";
-import { boxInitialValues, boxValidationSchema } from "./box-form-config";
+import { boxInitialValues, boxValidationSchema, workerInitialValues, workerValidationSchema, workerValidationWithoutPasswordSchema } from "./worker-form-config";
 import { BUTTON_VARIANT, Gender_OPTIONS } from "@/helper/constants";
 import Button from "../button";
 import InputLabel from "../input-label";
@@ -12,24 +12,20 @@ import { toast } from "sonner";
 import { getFirstError } from "@/helper/utils";
 import { useRouter } from "next/navigation";
 
-const BoxForm = ({ initialValue = {}, id = null }) => {
+const WorkerForm = ({ initialValue = {}, id = null }) => {
   const router = useRouter();
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     console.log("Form values:", values);
     try {
-      await axiosInstance.post("/box/", values, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      toast.success("Box created successfully");
+      await axiosInstance.post("/register/", values);
+      toast.success("Worker created successfully");
       resetForm();
       router.refresh();
-      router.push("/boxes");
+      router.push("/workers");
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
-          "Something went wrong while creating data..."
+        "Something went wrong while creating data..."
       );
     } finally {
       setSubmitting(false);
@@ -38,20 +34,16 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
 
   const handleEdit = async (values, { resetForm, setSubmitting }) => {
     try {
-      await axiosInstance.put(`/box/${id}`, values, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      toast.success("Updated successfully");
+      await axiosInstance.put(`/users/${id}/`, values);
+      toast.success("Worker updated successfully");
       resetForm();
       router.refresh();
-      router.push("/boxes");
+      router.push("/workers");
     } catch (error) {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(
         getFirstError(error?.response?.data?.message) ||
-          "Something went wrong while Updating data..."
+        "Something went wrong while Updating data..."
       );
     } finally {
       setSubmitting(false);
@@ -60,8 +52,8 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
 
   return (
     <Formik
-      initialValues={id ? initialValue : boxInitialValues}
-      validationSchema={boxValidationSchema}
+      initialValues={id ? initialValue : workerInitialValues}
+      validationSchema={id ? workerValidationWithoutPasswordSchema : workerValidationSchema}
       enableReinitialize
       onSubmit={id ? handleEdit : handleSubmit}
     >
@@ -70,55 +62,22 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
           {/* First Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="name" label="Name" errors={errors} />
+              <FormInput name="first_name" label="First Name" errors={errors} />
             </div>
             <div className="flex-1">
-              <FormSelectBox
-                name="gender"
-                label="Gender"
-                errors={errors}
-                options={Gender_OPTIONS}
-              />
+              <FormInput name="last_name" label="Last Name" errors={errors} />
             </div>
           </div>
-
           {/* Second Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="province" label="Province" errors={errors} />
+              <FormInput name="phone_number" label="Phone No" errors={errors} />
             </div>
             <div className="flex-1">
-              <FormInput name="city" label="City" errors={errors} />
+              {!id && <FormInput name="password" label="Password" errors={errors} />}
             </div>
           </div>
 
-          {/* Third Row */}
-          <div className="flex gap-3 mb-2">
-            <div className="flex-1">
-              <FormInput name="area" label="Area" errors={errors} />
-            </div>
-            <div className="flex-1">
-              <FormInput
-                name="mobile_number"
-                label="Mobile Number"
-                errors={errors}
-              />
-            </div>
-          </div>
-
-          {/* Fourth Row */}
-          <div className="mb-2">
-            <FormInput
-              name="complete_address"
-              label="Complete Address"
-              errors={errors}
-            />
-          </div>
-
-          <div className="mb-2">
-            <InputLabel name="image" label="Upload Image" />
-            <FileInputField id="image" name="image" />
-          </div>
 
           <div className="flex justify-end items-center gap-3 mt-5">
             <Button disabled={isSubmitting} className="px-3" type="submit">
@@ -126,7 +85,7 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
             </Button>
             <Button
               variant={BUTTON_VARIANT.SECONDARY}
-              onClick={() => router.push("/box")}
+              onClick={() => router.push("/workers")}
               className="px-3"
             >
               Cancel
@@ -138,4 +97,4 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
   );
 };
 
-export default BoxForm;
+export default WorkerForm;
