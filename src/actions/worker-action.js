@@ -2,24 +2,23 @@
 
 import axiosInstance from "@/helper/axios";
 
-export async function getAllBoxes(query = "", page) {
+
+export async function getWorkers(query = "", page) {
   try {
     const response = await axiosInstance.get(
-      `/box/?search=${query}&page=${page}`
+      `/users/?user_type=worker&search=${query}&page=${page}`
     );
     return response.data;
   } catch (error) {
-    console.log("🚀 ~ getAllBoxes ~ error:", error);
+    console.log("🚀 ~ getWorkers ~ error:", error);
   }
 }
 
-export async function getBoxById(id) {
+export async function getWorkerById(id) {
   try {
-    const response = await axiosInstance.get(`/box/${id}`);
+    const response = await axiosInstance.get(`/users/${id}`);
     return response.data;
   } catch (error) {
     console.log("🚀 ~ getAllBoxes ~ error:", error);
   }
 }
-
-

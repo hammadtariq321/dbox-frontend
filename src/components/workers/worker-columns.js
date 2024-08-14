@@ -1,37 +1,17 @@
-export const box_columns = [
+export const worker_columns = [
   {
-    name: "Name",
-    selector: (row) => row.name,
+    name: "First Name",
+    selector: (row) => row.first_name,
     sortable: true,
   },
   {
-    name: "Mobile Number",
-    selector: (row) => row.mobile_number,
+    name: "Last Name",
+    selector: (row) => row.last_name,
     sortable: true,
   },
   {
-    name: "Province",
-    selector: (row) => row.province,
+    name: "Phone No",
+    selector: (row) => row.phone_number,
     sortable: true,
-  },
-  {
-    name: "City",
-    selector: (row) => row.city,
-    sortable: true,
-  },
-  {
-    name: "Area",
-    selector: (row) => row.area,
-    sortable: true,
-  },
-  {
-    name: "Complete Address",
-    selector: (row) => row.complete_address,
-    sortable: true,
-  },
-  {
-    name: "Gender",
-    selector: (row) => row.gender,
-    sortable: true,
-  },
+  }
 ];

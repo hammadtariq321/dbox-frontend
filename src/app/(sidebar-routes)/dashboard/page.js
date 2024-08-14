@@ -2,8 +2,8 @@ import PageHeading from "@/components/page-heading";
 import React from "react";
 import { LuCalendarDays } from "react-icons/lu";
 import { FaRegCalendarCheck, FaRegCalendarMinus } from "react-icons/fa";
-import { getDashboardCount } from "@/actions/box-action";
 import DashboardCard from "@/components/dashbaord/dashbaord-card";
+import { getDashboardCount } from "@/actions/dashboard-actions";
 
 async function DashboardPage() {
   const dashbaordCount = await getDashboardCount();

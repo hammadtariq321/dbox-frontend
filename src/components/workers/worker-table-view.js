@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 import DataTableView from "../data-table-view";
-import { box_columns } from "./box-columns";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ConfirmationModal from "../modal/confirmation-modal";
 import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
+import { worker_columns } from "./worker-columns";
 
-const BoxTableView = ({ data }) => {
+const WorkerTableView = ({ data }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [selectedRowID, setSelectedRowID] = useState(null);
@@ -20,16 +20,16 @@ const BoxTableView = ({ data }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      const res = await axiosInstance.delete(`/box/${selectedRowID}`);
+      const res = await axiosInstance.delete(`/user/${selectedRowID}`);
       setSelectedRowID(null);
       setOpen(false);
-      toast.success("Box deleted successfully");
+      toast.success("Worker deleted successfully");
       router.refresh();
     } catch (error) {
       console.log("🚀 ~ handleConfirmDelete ~ error:", error);
       toast.error(
         error?.response?.data?.message ||
-          "Something went wrong while deleting the box"
+        "Something went wrong while deleting the Worker"
       );
     }
   };
@@ -57,7 +57,7 @@ const BoxTableView = ({ data }) => {
     button: true,
   };
 
-  const columns = [...box_columns, actionColumn];
+  const columns = [...worker_columns, actionColumn];
 
   return (
     <>
@@ -72,4 +72,4 @@ const BoxTableView = ({ data }) => {
   );
 };
 
-export default BoxTableView;
+export default WorkerTableView;
