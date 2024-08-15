@@ -11,13 +11,12 @@ async function DonationBox({ searchParams }) {
   const currentPage = Number(searchParams?.page) || 1;
 
   const transactionList = await getAllTransactions(query, currentPage);
-  console.log("🚀 ~ DonationBox ~ transactionList:", transactionList);
   return (
     <>
       <div className="flex justify-between items-center">
         <PageHeading title="Transactions List" />
         <Link
-          href="/transaction/add"
+          href="/transactions/add"
           className="bg-primary text-white px-4 py-3 rounded shadow flex items-center text-xs hover:bg-primary-hover"
         >
           <LuPlus size={15} className="mr-2" /> Add New Transaction

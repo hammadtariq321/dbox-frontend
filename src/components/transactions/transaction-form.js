@@ -1,31 +1,35 @@
 "use client";
 import { Form, Formik } from "formik";
-import { boxInitialValues, boxValidationSchema } from "./box-form-config";
-import { BUTTON_VARIANT, Gender_OPTIONS } from "@/helper/constants";
+import {
+  BUTTON_VARIANT,
+  Donation_Type,
+  Donation_Type_OPTIONS,
+  Gender_OPTIONS,
+} from "@/helper/constants";
 import Button from "../button";
-import InputLabel from "../input-label";
 import FormInput from "../form-input";
 import FormSelectBox from "../form-select-box";
-import FileInputField from "../file-input-field";
 import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
 import { getFirstError } from "@/helper/utils";
 import { useRouter } from "next/navigation";
+import {
+  transactionInitialValues,
+  transactionValidationSchema,
+} from "./transaction-form-config";
+import { useState, useEffect } from "react";
 
-const BoxForm = ({ initialValue = {}, id = null }) => {
+const TransactionForm = ({ initialValue = {}, id = null }) => {
   const router = useRouter();
+  const [boxOptions, setBoxOptions] = useState([]);
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
     console.log("Form values:", values);
     try {
-      await axiosInstance.post("/box/", values, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      toast.success("Box created successfully");
+      await axiosInstance.post("/transaction/", values);
+      toast.success("Transaction created successfully");
       resetForm();
       router.refresh();
-      router.push("/boxes");
+      router.push("/transactions");
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
@@ -38,15 +42,11 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
 
   const handleEdit = async (values, { resetForm, setSubmitting }) => {
     try {
-      await axiosInstance.put(`/box/${id}`, values, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axiosInstance.put(`/transaction/${id}`, values);
       toast.success("Updated successfully");
       resetForm();
       router.refresh();
-      router.push("/boxes");
+      router.push("/transactions");
     } catch (error) {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(
@@ -58,14 +58,29 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
     }
   };
 
+  useEffect(() => {
+    getAllBoxes();
+  }, []);
+  async function getAllBoxes(query = "", page) {
+    try {
+      const response = await axiosInstance.get(`/box/`);
+      const mappedOptions = response?.data?.results.map((item) => ({
+        value: item.id, // Use `id` from your API response as the value
+        label: item.name, // Use `name` from your API response as the label
+      }));
+      setBoxOptions(mappedOptions);
+    } catch (error) {
+      console.log("🚀 ~ getAllBoxes ~ error:", error);
+    }
+  }
   return (
     <Formik
-      initialValues={id ? initialValue : boxInitialValues}
-      validationSchema={boxValidationSchema}
+      initialValues={id ? initialValue : transactionInitialValues}
+      validationSchema={transactionValidationSchema}
       enableReinitialize
       onSubmit={id ? handleEdit : handleSubmit}
     >
-      {({ errors, isSubmitting }) => (
+      {({ errors, isSubmitting, values }) => (
         <Form className="mt-5">
           {/* First Row */}
           <div className="flex gap-3 mb-2">
@@ -115,10 +130,32 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
             />
           </div>
 
-          <div className="mb-2">
-            <InputLabel name="image" label="Upload Image" />
-            <FileInputField id="image" name="image" />
+          <div className="flex gap-3 mb-2">
+            <div className="mb-2 flex-1">
+              <FormSelectBox
+                errors={errors}
+                label={"Donation Type"}
+                name="donation_type"
+                options={Donation_Type_OPTIONS}
+              />
+            </div>
+
+            <div className="mb-2 flex-1">
+              <FormInput name="amount" label="Amount" errors={errors} />
+            </div>
           </div>
+
+          {values?.donation_type == "box" && (
+            <div className="mb-2">
+              <FormSelectBox
+                isDisabled={values?.donation_type != "box"}
+                errors={errors}
+                label="Select Box"
+                name="box"
+                options={boxOptions}
+              />
+            </div>
+          )}
 
           <div className="flex justify-end items-center gap-3 mt-5">
             <Button disabled={isSubmitting} className="px-3" type="submit">
@@ -138,4 +175,4 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
   );
 };
 
-export default BoxForm;
+export default TransactionForm;

@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 import DataTableView from "../data-table-view";
-import { box_columns } from "./box-columns";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import ConfirmationModal from "../modal/confirmation-modal";
 import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
+import { transaction_columns } from "./transaction-columns";
 
 const BoxTableView = ({ data }) => {
   const router = useRouter();
@@ -57,7 +57,7 @@ const BoxTableView = ({ data }) => {
     button: true,
   };
 
-  const columns = [...box_columns, actionColumn];
+  const columns = [...transaction_columns, actionColumn];
 
   return (
     <>

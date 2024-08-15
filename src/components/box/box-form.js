@@ -25,7 +25,7 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
       toast.success("Box created successfully");
       resetForm();
       router.refresh();
-      router.push("/boxes");
+      router.push("/box");
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
@@ -46,7 +46,7 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
       toast.success("Updated successfully");
       resetForm();
       router.refresh();
-      router.push("/boxes");
+      router.push("/box");
     } catch (error) {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(

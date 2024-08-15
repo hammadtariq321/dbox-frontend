@@ -6,10 +6,9 @@ import { useRouter } from "next/navigation";
 import ConfirmationModal from "../modal/confirmation-modal";
 import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
-import { transaction_columns } from "../transactions/transaction-columns";
+import { box_columns } from "./box-columns";
 
 const BoxTableView = ({ data }) => {
-  console.log("🚀 ~ BoxTableView ~ data:", data);
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [selectedRowID, setSelectedRowID] = useState(null);
@@ -21,10 +20,10 @@ const BoxTableView = ({ data }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      const res = await axiosInstance.delete(`/box/${selectedRowID}`);
+      const res = await axiosInstance.delete(`/transaction/${selectedRowID}`);
       setSelectedRowID(null);
       setOpen(false);
-      toast.success("Box deleted successfully");
+      toast.success("Transaction deleted successfully");
       router.refresh();
     } catch (error) {
       console.log("🚀 ~ handleConfirmDelete ~ error:", error);
@@ -40,7 +39,7 @@ const BoxTableView = ({ data }) => {
     cell: (row) => (
       <div className="flex space-x-2">
         <button
-          onClick={() => router.push(`/transaction/edit/${row?.id}`)}
+          onClick={() => router.push(`/transactions/edit/${row?.id}`)}
           className="text-primary hover:text-primary-hover "
         >
           <FaEdit size={18} />
@@ -58,7 +57,7 @@ const BoxTableView = ({ data }) => {
     button: true,
   };
 
-  const columns = [...transaction_columns, actionColumn];
+  const columns = [...box_columns, actionColumn];
 
   return (
     <>
@@ -67,7 +66,7 @@ const BoxTableView = ({ data }) => {
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={handleConfirmDelete}
-        message="Are you sure you want to delete this box?"
+        message="Are you sure you want to delete this Transaction?"
       />
     </>
   );

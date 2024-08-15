@@ -16,7 +16,7 @@ export async function getAllTransactions(query = "", page) {
 
 export async function getTransactionById(id) {
   try {
-    const response = await axiosInstance.get(`/box/${id}`);
+    const response = await axiosInstance.get(`/transaction/${id}`);
     return response.data;
   } catch (error) {
     console.log("🚀 ~ getAllBoxes ~ error:", error);

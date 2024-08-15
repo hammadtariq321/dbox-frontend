@@ -1,25 +1,29 @@
-import { getBoxById } from "@/actions/box-actions";
+import { getTransactionById } from "@/actions/transaction-actions";
 import BoxForm from "@/components/box/box-form";
 import PageHeading from "@/components/page-heading";
+import TransactionForm from "@/components/transactions/transaction-form";
 
 const EditPage = async ({ params }) => {
   const { id } = params;
-  const boxDetail = await getBoxById(id);
+  const transactionDetail = await getTransactionById(id);
+  console.log("🚀 ~ EditPage ~ transactionDetail:", transactionDetail);
 
   const initialValue = {
-    mobile_number: boxDetail?.mobile_number || "",
-    name: boxDetail?.name || "",
-    province: boxDetail.province || "",
-    city: boxDetail?.city || "",
-    area: boxDetail?.area || "",
-    complete_address: boxDetail.complete_address || "",
-    gender: boxDetail?.gender || "",
-    image: boxDetail?.image || null,
+    name: transactionDetail?.name || "",
+    gender: transactionDetail?.gender || "",
+    province: transactionDetail?.province || "",
+    city: transactionDetail?.city || "",
+    area: transactionDetail?.area || "",
+    complete_address: transactionDetail?.complete_address || "",
+    mobile_number: transactionDetail?.mobile_number || "",
+    donation_type: transactionDetail?.donation_type || "",
+    amount: transactionDetail?.amount || 0,
+    box: transactionDetail?.box || "", // UUID of box
   };
   return (
     <>
-      <PageHeading title="Edit Box" />
-      <BoxForm initialValue={initialValue} id={id} />
+      <PageHeading title="Edit Transaction" />
+      <TransactionForm initialValue={initialValue} id={id} />
     </>
   );
 };

@@ -1,42 +1,39 @@
 import * as Yup from "yup";
-export const boxInitialValues = {
-  mobile_number: "",
+
+export const transactionInitialValues = {
   name: "",
+  gender: "",
   province: "",
   city: "",
   area: "",
   complete_address: "",
-  gender: "",
-  image: null, // Read-only, no input needed
+  mobile_number: "",
+  donation_type: "",
+  amount: 0,
+  box: "", //UUID of box
 };
 
-export const boxValidationSchema = Yup.object({
+export const transactionValidationSchema = Yup.object({
+  donation_type: Yup.string()
+    .required("Donation type is required")
+    .min(1, "Donation type is required")
+    .max(50, "Donation type is too long"),
   mobile_number: Yup.string()
     .required("Mobile number is required")
-    .min(13, "Mobile number is too short")
-    .max(13, "Mobile number is too long"),
+    .min(8, "Mobile number is too short")
+    .max(20, "Mobile number is too long"),
   name: Yup.string()
     .required("Name is required")
     .min(1, "Name is too short")
     .max(50, "Name is too long"),
-  province: Yup.string()
-    .required("Province is required")
-    .min(1, "Province is too short")
-    .max(20, "Province is too long"),
-  city: Yup.string()
-    .required("City is required")
-    .min(1, "City is too short")
-    .max(20, "City is too long"),
-  area: Yup.string()
-    .required("Area is required")
-    .min(1, "Area is too short")
-    .max(20, "Area is too long"),
-  complete_address: Yup.string()
-    .required("Complete address is required")
-    .min(1, "Complete address is too short")
-    .max(300, "Complete is too long"),
-  gender: Yup.string()
-    .required("Gender is required")
-    .oneOf(["male", "female"], "Gender is required"),
-  image: Yup.string().nullable(), // Read-only field
+  amount: Yup.number()
+    .required("Amount is required")
+    .positive("Amount must be greater than zero")
+    .integer("Amount must be an integer"),
+  province: Yup.string().max(20, "Province is too long"),
+  city: Yup.string().max(20, "City is too long"),
+  area: Yup.string().max(20, "Area is too long"),
+  complete_address: Yup.string().max(300, "Complete is too long"),
+  gender: Yup.string().oneOf(["male", "female"], "Gender is required"),
+  box: Yup.string().uuid("Box ID is not valid").nullable(),
 });
