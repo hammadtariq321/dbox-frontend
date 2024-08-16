@@ -1,4 +1,4 @@
-import { getBoxById } from "@/actions/box-action";
+import { getBoxById } from "@/actions/box-actions";
 import BoxForm from "@/components/box/box-form";
 import PageHeading from "@/components/page-heading";
 

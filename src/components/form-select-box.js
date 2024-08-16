@@ -1,6 +1,6 @@
 import InputLabel from "./input-label";
 import ErrorMessage from "./error-message";
-import SelectField from "./box/select-box";
+import SelectField from "./select-box";
 
 const FormSelectBox = ({ name, label, options, errors, ...otherProps }) => {
   return (

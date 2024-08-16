@@ -1,4 +1,4 @@
-import { getAllBoxes } from "@/actions/box-action";
+import { getAllBoxes } from "@/actions/box-actions";
 import BoxTableView from "@/components/box/box-table-view";
 import PageHeading from "@/components/page-heading";
 import TableSearchField from "@/components/table-search-field";
