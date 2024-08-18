@@ -8,7 +8,7 @@ import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
 import { transaction_columns } from "./transaction-columns";
 
-const BoxTableView = ({ data }) => {
+const TransactionTableView = ({ data }) => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [selectedRowID, setSelectedRowID] = useState(null);
@@ -29,7 +29,7 @@ const BoxTableView = ({ data }) => {
       console.log("🚀 ~ handleConfirmDelete ~ error:", error);
       toast.error(
         error?.response?.data?.message ||
-          "Something went wrong while deleting the box"
+        "Something went wrong while deleting the box"
       );
     }
   };
@@ -72,4 +72,4 @@ const BoxTableView = ({ data }) => {
   );
 };
 
-export default BoxTableView;
+export default TransactionTableView;

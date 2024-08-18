@@ -33,4 +33,4 @@ async function WorkersPage({ searchParams }) {
   )
 }
 
-export default DonationBox;
+export default WorkersPage;

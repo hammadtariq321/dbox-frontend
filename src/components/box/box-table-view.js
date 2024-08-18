@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import ConfirmationModal from "../modal/confirmation-modal";
 import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
-import { box_columns } from "./box-columns";
 
 const BoxTableView = ({ data }) => {
   const router = useRouter();

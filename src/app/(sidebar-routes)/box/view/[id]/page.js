@@ -1,4 +1,5 @@
-import { getBoxById } from '@/actions/box-action';
+
+import { getBoxById } from '@/actions/box-actions';
 import PageHeading from '@/components/page-heading';
 import React from 'react'
 

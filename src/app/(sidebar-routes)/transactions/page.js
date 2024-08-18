@@ -1,7 +1,7 @@
 import { getAllTransactions } from "@/actions/transaction-actions";
-import BoxTableView from "@/components/box/box-table-view";
 import PageHeading from "@/components/page-heading";
 import TableSearchField from "@/components/table-search-field";
+import TransactionTableView from "@/components/transactions/transaction-table-view";
 import Link from "next/link";
 import React, { Suspense } from "react";
 import { LuPlus } from "react-icons/lu";
@@ -11,6 +11,7 @@ async function DonationBox({ searchParams }) {
   const currentPage = Number(searchParams?.page) || 1;
 
   const transactionList = await getAllTransactions(query, currentPage);
+  console.log("transactionList", transactionList)
   return (
     <>
       <div className="flex justify-between items-center">
@@ -25,7 +26,7 @@ async function DonationBox({ searchParams }) {
 
       <TableSearchField />
       <Suspense key={query + currentPage} fallback={<div>Loading...</div>}>
-        <BoxTableView data={transactionList} />
+        <TransactionTableView data={transactionList} />
       </Suspense>
     </>
   );
