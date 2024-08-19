@@ -31,9 +31,11 @@ const LoginForm = () => {
     <Formik
       initialValues={loginInitialValues}
       validationSchema={loginValidationSchema}
+      // validateOnBlur={false}
+      // validateOnChange={false}
       onSubmit={handleSubmit}
     >
-      {({ errors, isSubmitting }) => (
+      {({ errors, isSubmitting, touched }) => (
         <Form>
           <div className="mb-4">
             <label
@@ -47,7 +49,7 @@ const LoginForm = () => {
               name="phone_number"
               className={`mt-1 block w-full px-3 py-2 border  rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
             />
-            <ErrorMessage error={errors.phone_number} />
+            <ErrorMessage touched={touched.phone_number} error={errors.phone_number} />
           </div>
           <div className="mb-6">
             <label
@@ -62,16 +64,15 @@ const LoginForm = () => {
               name="password"
               className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
             />
-            <ErrorMessage error={errors.password} />
+            <ErrorMessage touched={touched.password} error={errors.password} />
           </div>
           <button
             disabled={isSubmitting}
             type="submit"
-            className={`w-full ${
-              isSubmitting
-                ? "cursor-not-allowed bg-gray-500"
-                : "bg-blue-600 hover:bg-blue-700"
-            } text-white py-2 px-4 rounded-md `}
+            className={`w-full ${isSubmitting
+              ? "cursor-not-allowed bg-gray-500"
+              : "bg-blue-600 hover:bg-blue-700"
+              } text-white py-2 px-4 rounded-md `}
           >
             {isSubmitting ? "Submitting..." : "Login"}
           </button>
