@@ -20,16 +20,16 @@ const TransactionTableView = ({ data }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      const res = await axiosInstance.delete(`/box/${selectedRowID}`);
+      const res = await axiosInstance.delete(`/transaction/${selectedRowID}`);
       setSelectedRowID(null);
       setOpen(false);
-      toast.success("Box deleted successfully");
+      toast.success("Transaction deleted successfully");
       router.refresh();
     } catch (error) {
       console.log("🚀 ~ handleConfirmDelete ~ error:", error);
       toast.error(
         error?.response?.data?.message ||
-        "Something went wrong while deleting the box"
+        "Something went wrong while deleting the Transaction"
       );
     }
   };
@@ -39,7 +39,7 @@ const TransactionTableView = ({ data }) => {
     cell: (row) => (
       <div className="flex space-x-2">
         <button
-          onClick={() => router.push(`/box/edit/${row?.id}`)}
+          onClick={() => router.push(`/transactions/edit/${row?.id}`)}
           className="text-primary hover:text-primary-hover "
         >
           <FaEdit size={18} />

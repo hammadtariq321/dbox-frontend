@@ -33,7 +33,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
-          "Something went wrong while creating data..."
+        "Something went wrong while creating data..."
       );
     } finally {
       setSubmitting(false);
@@ -42,7 +42,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
 
   const handleEdit = async (values, { resetForm, setSubmitting }) => {
     try {
-      await axiosInstance.put(`/transaction/${id}`, values);
+      await axiosInstance.put(`/transaction/${id}/`, values);
       toast.success("Updated successfully");
       resetForm();
       router.refresh();
@@ -51,7 +51,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(
         getFirstError(error?.response?.data?.message) ||
-          "Something went wrong while Updating data..."
+        "Something went wrong while Updating data..."
       );
     } finally {
       setSubmitting(false);
@@ -163,7 +163,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
             </Button>
             <Button
               variant={BUTTON_VARIANT.SECONDARY}
-              onClick={() => router.push("/box")}
+              onClick={() => router.back()}
               className="px-3"
             >
               Cancel
