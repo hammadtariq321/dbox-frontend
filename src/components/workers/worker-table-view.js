@@ -20,7 +20,7 @@ const WorkerTableView = ({ data }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      const res = await axiosInstance.delete(`/user/${selectedRowID}`);
+      const res = await axiosInstance.delete(`/users/${selectedRowID}`);
       setSelectedRowID(null);
       setOpen(false);
       toast.success("Worker deleted successfully");

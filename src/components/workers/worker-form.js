@@ -20,8 +20,8 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
       await axiosInstance.post("/register/", values);
       toast.success("Worker created successfully");
       resetForm();
-      router.refresh();
       router.push("/workers");
+      router.refresh();
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
@@ -33,6 +33,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
   };
 
   const handleEdit = async (values, { resetForm, setSubmitting }) => {
+    alert("")
     try {
       await axiosInstance.put(`/users/${id}/`, values);
       toast.success("Worker updated successfully");
