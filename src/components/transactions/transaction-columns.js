@@ -1,9 +1,10 @@
 export const transaction_columns = [
-  {
-    name: "Name",
-    selector: "name",
-    sortable: true,
-  },
+  // {
+  //   name: "Name",
+  //   selector: "name",
+  //   sortable: true,
+  //   cell: (row) => row.name || "N/A",
+  // },
   {
     name: "Gender",
     selector: "gender",
@@ -16,13 +17,25 @@ export const transaction_columns = [
     sortable: true, // Enable sorting if needed
   },
   {
+    name: "Province",
+    selector: "province",
+    sortable: true,
+    cell: (row) => row.province || "N/A", // Display "N/A" if the value is null
+  },
+  {
     name: "City",
     selector: "city",
     sortable: true,
   },
   {
-    name: "Amount",
-    selector: "amount",
+    name: "Area",
+    selector: "area",
+    sortable: true,
+    cell: (row) => row.area || "N/A",
+  },
+  {
+    name: "Complete Address",
+    selector: "complete_address",
     sortable: true,
   },
 

@@ -11,7 +11,6 @@ async function DonationBox({ searchParams }) {
   const currentPage = Number(searchParams?.page) || 1;
 
   const transactionList = await getAllTransactions(query, currentPage);
-  console.log("transactionList", transactionList)
   return (
     <>
       <div className="flex justify-between items-center">
