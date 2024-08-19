@@ -65,12 +65,17 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
       enableReinitialize
       onSubmit={id ? handleEdit : handleSubmit}
     >
-      {({ errors, isSubmitting }) => (
+      {({ errors, isSubmitting, touched }) => (
         <Form className="mt-5">
           {/* First Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="name" label="Name" errors={errors} />
+              <FormInput
+                name="name"
+                label="Name"
+                errors={errors}
+                touched={touched}
+              />
             </div>
             <div className="flex-1">
               <FormSelectBox
@@ -78,6 +83,7 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
                 label="Gender"
                 errors={errors}
                 options={Gender_OPTIONS}
+                touched={touched}
               />
             </div>
           </div>
@@ -85,23 +91,39 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
           {/* Second Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="province" label="Province" errors={errors} />
+              <FormInput
+                name="province"
+                label="Province"
+                errors={errors}
+                touched={touched}
+              />
             </div>
             <div className="flex-1">
-              <FormInput name="city" label="City" errors={errors} />
+              <FormInput
+                name="city"
+                label="City"
+                errors={errors}
+                touched={touched}
+              />
             </div>
           </div>
 
           {/* Third Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="area" label="Area" errors={errors} />
+              <FormInput
+                name="area"
+                label="Area"
+                errors={errors}
+                touched={touched}
+              />
             </div>
             <div className="flex-1">
               <FormInput
                 name="mobile_number"
                 label="Mobile Number"
                 errors={errors}
+                touched={touched}
               />
             </div>
           </div>
@@ -112,6 +134,7 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
               name="complete_address"
               label="Complete Address"
               errors={errors}
+              touched={touched}
             />
           </div>
 
