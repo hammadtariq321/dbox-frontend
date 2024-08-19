@@ -34,6 +34,8 @@ export const transactionValidationSchema = Yup.object({
   city: Yup.string().max(20, "City is too long"),
   area: Yup.string().max(20, "Area is too long"),
   complete_address: Yup.string().max(300, "Complete is too long"),
-  gender: Yup.string().oneOf(["male", "female"], "Gender is required"),
+  gender: Yup.string()
+    .required("Gender is required")
+    .oneOf(["male", "female"], "Gender is required"),
   box: Yup.string().uuid("Box ID is not valid").nullable(),
 });

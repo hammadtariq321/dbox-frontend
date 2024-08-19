@@ -33,7 +33,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
-        "Something went wrong while creating data..."
+          "Something went wrong while creating data..."
       );
     } finally {
       setSubmitting(false);
@@ -51,7 +51,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(
         getFirstError(error?.response?.data?.message) ||
-        "Something went wrong while Updating data..."
+          "Something went wrong while Updating data..."
       );
     } finally {
       setSubmitting(false);
@@ -80,12 +80,17 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
       enableReinitialize
       onSubmit={id ? handleEdit : handleSubmit}
     >
-      {({ errors, isSubmitting, values }) => (
+      {({ errors, isSubmitting, values, touched }) => (
         <Form className="mt-5">
           {/* First Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="name" label="Name" errors={errors} />
+              <FormInput
+                name="name"
+                label="Name"
+                errors={errors}
+                touched={touched}
+              />
             </div>
             <div className="flex-1">
               <FormSelectBox
@@ -93,6 +98,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
                 label="Gender"
                 errors={errors}
                 options={Gender_OPTIONS}
+                touched={touched}
               />
             </div>
           </div>
@@ -100,23 +106,39 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
           {/* Second Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="province" label="Province" errors={errors} />
+              <FormInput
+                touched={touched}
+                name="province"
+                label="Province"
+                errors={errors}
+              />
             </div>
             <div className="flex-1">
-              <FormInput name="city" label="City" errors={errors} />
+              <FormInput
+                touched={touched}
+                name="city"
+                label="City"
+                errors={errors}
+              />
             </div>
           </div>
 
           {/* Third Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="area" label="Area" errors={errors} />
+              <FormInput
+                name="area"
+                label="Area"
+                errors={errors}
+                touched={touched}
+              />
             </div>
             <div className="flex-1">
               <FormInput
                 name="mobile_number"
                 label="Mobile Number"
                 errors={errors}
+                touched={touched}
               />
             </div>
           </div>
@@ -127,6 +149,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
               name="complete_address"
               label="Complete Address"
               errors={errors}
+              touched={touched}
             />
           </div>
 
@@ -137,11 +160,17 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
                 label={"Donation Type"}
                 name="donation_type"
                 options={Donation_Type_OPTIONS}
+                touched={touched}
               />
             </div>
 
             <div className="mb-2 flex-1">
-              <FormInput name="amount" label="Amount" errors={errors} />
+              <FormInput
+                name="amount"
+                label="Amount"
+                errors={errors}
+                touched={touched}
+              />
             </div>
           </div>
 
@@ -153,6 +182,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
                 label="Select Box"
                 name="box"
                 options={boxOptions}
+                touched={touched}
               />
             </div>
           )}

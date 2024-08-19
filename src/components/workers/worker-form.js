@@ -1,6 +1,12 @@
 "use client";
 import { Form, Formik } from "formik";
-import { boxInitialValues, boxValidationSchema, workerInitialValues, workerValidationSchema, workerValidationWithoutPasswordSchema } from "./worker-form-config";
+import {
+  boxInitialValues,
+  boxValidationSchema,
+  workerInitialValues,
+  workerValidationSchema,
+  workerValidationWithoutPasswordSchema,
+} from "./worker-form-config";
 import { BUTTON_VARIANT, Gender_OPTIONS } from "@/helper/constants";
 import Button from "../button";
 import InputLabel from "../input-label";
@@ -25,7 +31,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
-        "Something went wrong while creating data..."
+          "Something went wrong while creating data..."
       );
     } finally {
       setSubmitting(false);
@@ -33,7 +39,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
   };
 
   const handleEdit = async (values, { resetForm, setSubmitting }) => {
-    alert("")
+    alert("");
     try {
       await axiosInstance.put(`/users/${id}/`, values);
       toast.success("Worker updated successfully");
@@ -44,7 +50,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(
         getFirstError(error?.response?.data?.message) ||
-        "Something went wrong while Updating data..."
+          "Something went wrong while Updating data..."
       );
     } finally {
       setSubmitting(false);
@@ -54,31 +60,54 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
   return (
     <Formik
       initialValues={id ? initialValue : workerInitialValues}
-      validationSchema={id ? workerValidationWithoutPasswordSchema : workerValidationSchema}
+      validationSchema={
+        id ? workerValidationWithoutPasswordSchema : workerValidationSchema
+      }
       enableReinitialize
       onSubmit={id ? handleEdit : handleSubmit}
     >
-      {({ errors, isSubmitting }) => (
+      {({ errors, isSubmitting, touched }) => (
         <Form className="mt-5">
           {/* First Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="first_name" label="First Name" errors={errors} />
+              <FormInput
+                name="first_name"
+                label="First Name"
+                errors={errors}
+                touched={touched}
+              />
             </div>
             <div className="flex-1">
-              <FormInput name="last_name" label="Last Name" errors={errors} />
+              <FormInput
+                name="last_name"
+                label="Last Name"
+                errors={errors}
+                touched={touched}
+              />
             </div>
           </div>
           {/* Second Row */}
           <div className="flex gap-3 mb-2">
             <div className="flex-1">
-              <FormInput name="phone_number" label="Phone No" errors={errors} />
+              <FormInput
+                name="phone_number"
+                label="Phone No"
+                errors={errors}
+                touched={touched}
+              />
             </div>
             <div className="flex-1">
-              {!id && <FormInput name="password" label="Password" errors={errors} />}
+              {!id && (
+                <FormInput
+                  name="password"
+                  label="Password"
+                  errors={errors}
+                  touched={touched}
+                />
+              )}
             </div>
           </div>
-
 
           <div className="flex justify-end items-center gap-3 mt-5">
             <Button disabled={isSubmitting} className="px-3" type="submit">
