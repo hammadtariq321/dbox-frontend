@@ -1,14 +1,25 @@
 
 import { getBoxById } from '@/actions/box-actions';
 import PageHeading from '@/components/page-heading';
+import Link from 'next/link';
 import React from 'react'
+import { LuArrowLeftRight } from 'react-icons/lu';
 
 const BoxView = async ({ params }) => {
     const { id } = params;
     const boxDetail = await getBoxById(id);
     return (
         <>
-            <PageHeading title="Box Detail" />
+            {/* <PageHeading title="Box Detail" /> */}
+            <div className="flex justify-between items-center">
+                <PageHeading title="Box Detail" />
+                <Link
+                    href="/box/add"
+                    className="bg-primary text-white px-4 py-3 rounded shadow flex items-center text-xs hover:bg-primary-hover"
+                >
+                    <LuArrowLeftRight size={15} className="mr-2" /> Transfer Box
+                </Link>
+            </div>
             <div className='mt-5 flex flex-row justify-between gap-3'>
                 <div className='w-full'>
                     <div className="flex flex-col bg-gray-50 border rounded p-3 my-3">
