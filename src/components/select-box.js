@@ -32,7 +32,7 @@ const SelectField = ({ name, options, ...props }) => {
           className="text-xs mt-1"
           id={name}
           options={options}
-          defaultInputValue={field.value}
+          // defaultInputValue={field.value}
           value={options.find((option) => option.value === field.value)}
           onChange={(selectedOption) =>
             setFieldValue(name, selectedOption ? selectedOption.value : "")
