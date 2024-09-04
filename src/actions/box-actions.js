@@ -21,5 +21,13 @@ export async function getBoxById(id) {
     console.log("🚀 ~ getAllBoxes ~ error:", error);
   }
 }
+export async function getUserBox(id) {
+  try {
+    const response = await axiosInstance.get(`/admin/box/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log("🚀 ~ getAllBoxes ~ error:", error);
+  }
+}
 
 

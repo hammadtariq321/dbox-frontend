@@ -1,5 +1,6 @@
 
-import { getBoxById } from '@/actions/box-actions';
+import { getBoxById, getUserBox } from '@/actions/box-actions';
+import UserBoxTableView from '@/components/box/user-box-table-view';
 import PageHeading from '@/components/page-heading';
 import Link from 'next/link';
 import React from 'react'
@@ -8,6 +9,7 @@ import { LuArrowLeftRight } from 'react-icons/lu';
 const BoxView = async ({ params }) => {
     const { id } = params;
     const boxDetail = await getBoxById(id);
+    const userBoxDetail = await getUserBox(id);
     return (
         <>
             {/* <PageHeading title="Box Detail" /> */}
@@ -42,7 +44,7 @@ const BoxView = async ({ params }) => {
                 <div className='w-full'>
                     <div className="flex flex-col bg-gray-50 border rounded p-3 my-3">
                         <label className="text-gray-700 text-xs">Gender:</label>
-                        <span className="text-gray-700 text-md font-semibold">{boxDetail?.gender}</span>
+                        <span className="text-gray-700 text-md font-semibold">{boxDetail?.gender?.charAt(0).toUpperCase() + boxDetail?.gender?.slice(1)}</span>
                     </div>
                     <div className="flex flex-col bg-gray-50 border rounded p-3 my-3">
                         <label className="text-gray-700 text-xs">Complete Address:</label>
@@ -58,6 +60,10 @@ const BoxView = async ({ params }) => {
                     </div>
                 </div>
             </div>
+
+            <h1 className='mt-5 font-bold text-xl'>Transactions</h1>
+            <UserBoxTableView data={userBoxDetail} />
+
         </>
     )
 }
