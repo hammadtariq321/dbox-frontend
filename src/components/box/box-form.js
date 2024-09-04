@@ -29,7 +29,7 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
-          "Something went wrong while creating data..."
+        "Something went wrong while creating data..."
       );
     } finally {
       setSubmitting(false);
@@ -38,7 +38,7 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
 
   const handleEdit = async (values, { resetForm, setSubmitting }) => {
     try {
-      await axiosInstance.put(`/box/${id}`, values, {
+      await axiosInstance.put(`/box/${id}/`, values, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -51,7 +51,7 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(
         getFirstError(error?.response?.data?.message) ||
-          "Something went wrong while Updating data..."
+        "Something went wrong while Updating data..."
       );
     } finally {
       setSubmitting(false);

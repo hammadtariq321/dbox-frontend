@@ -1,4 +1,21 @@
+import Image from "next/image";
+import Avatar from "@/assets/img/avatar.jpg"
+
 export const box_columns = [
+  {
+    name: "",
+    selector: (row) => row?.image,
+    width: '50px',
+    sortable: true,
+    cell: (row) => {
+      if (row?.image) {
+        return <Image src={row?.image} alt=" " className="rounded-full" height={50} width={50} /> || ""
+      }
+      else {
+        return <Image src={Avatar} alt=" " className="rounded-full" height={50} width={50} /> || ""
+      }
+    },
+  },
   {
     name: "Name",
     selector: (row) => row.name,

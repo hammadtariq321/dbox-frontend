@@ -4,39 +4,9 @@ import { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useDebouncedCallback } from "use-debounce";
 
-const customStyles = {
-  rows: {
-    style: {
-      minHeight: "50px", // override the row height
-    },
-  },
-  headCells: {
-    style: {
-      paddingLeft: "8px", // override the cell padding for head cells
-      paddingRight: "8px",
-      fontWeight: 600,
-      fontSize: 14,
-    },
-  },
-  cells: {
-    style: {
-      paddingLeft: "8px", // override the cell padding for data cells
-      paddingRight: "8px",
-      // fontSize: 13
-    },
-  },
-  subHeader: {
-    style: {
-      paddingLeft: "8px",
-      paddingRight: "8px",
-      justifyContent: "flex-end",
-      alignItems: "center",
-      display: "flex",
-    },
-  },
-};
 
-const DataTableView = ({ columns, data }) => {
+
+const DataTableView = ({ columns, data, rowMinHeight = '50px' }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -66,6 +36,38 @@ const DataTableView = ({ columns, data }) => {
     }
     replace(`${pathname}?${params.toString()}`);
   }, 300);
+
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: rowMinHeight, // override the row height
+      },
+    },
+    headCells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for head cells
+        paddingRight: "8px",
+        fontWeight: 600,
+        fontSize: 14,
+      },
+    },
+    cells: {
+      style: {
+        paddingLeft: "8px", // override the cell padding for data cells
+        paddingRight: "8px",
+        // fontSize: 13
+      },
+    },
+    subHeader: {
+      style: {
+        paddingLeft: "8px",
+        paddingRight: "8px",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        display: "flex",
+      },
+    },
+  };
 
   return (
     <DataTable
