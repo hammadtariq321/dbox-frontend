@@ -3,7 +3,6 @@ import Select from "react-select";
 import { Field, useFormikContext } from "formik";
 
 const SelectField = ({ name, options, ...props }) => {
-  console.log("🚀 ~ SelectField ~ props:", props);
   const { setFieldValue } = useFormikContext();
 
   const customStyles = {

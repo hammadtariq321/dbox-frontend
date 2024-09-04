@@ -3,7 +3,6 @@ import { Field, useField, useFormikContext } from "formik";
 const FileInputField = ({ name, label, multiple = false, ...props }) => {
   const { setFieldValue } = useFormikContext();
   const [field] = useField(name);
-  console.log("🚀 ~ FileInputField ~ field:", field);
 
   const handleChange = (event) => {
     const files = event.currentTarget.files;
