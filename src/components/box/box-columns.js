@@ -48,7 +48,7 @@ export const box_columns = [
   },
   {
     name: "Gender",
-    selector: (row) => row.gender,
+    selector: (row) => row.gender.charAt(0).toUpperCase() + row.gender.slice(1),
     sortable: true,
   },
 ];

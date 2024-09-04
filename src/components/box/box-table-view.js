@@ -20,10 +20,10 @@ const BoxTableView = ({ data }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      const res = await axiosInstance.delete(`/transaction/${selectedRowID}`);
+      const res = await axiosInstance.delete(`/box/${selectedRowID}`);
       setSelectedRowID(null);
       setOpen(false);
-      toast.success("Transaction deleted successfully");
+      toast.success("Box deleted successfully");
       router.refresh();
     } catch (error) {
       console.log("🚀 ~ handleConfirmDelete ~ error:", error);
@@ -72,7 +72,7 @@ const BoxTableView = ({ data }) => {
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={handleConfirmDelete}
-        message="Are you sure you want to delete this Transaction?"
+        message="Are you sure you want to delete this Box?"
       />
     </>
   );

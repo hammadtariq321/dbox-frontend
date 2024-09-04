@@ -15,7 +15,6 @@ import { useRouter } from "next/navigation";
 const BoxForm = ({ initialValue = {}, id = null }) => {
   const router = useRouter();
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-    console.log("Form values:", values);
     try {
       await axiosInstance.post("/box/", values, {
         headers: {

@@ -13,8 +13,8 @@ export const boxInitialValues = {
 export const boxValidationSchema = Yup.object({
   mobile_number: Yup.string()
     .required("Mobile number is required")
-    .min(13, "Mobile number is too short")
-    .max(13, "Mobile number is too long"),
+    .min(8, "Mobile number is too short")
+    .max(20, "Mobile number is too long"),
   name: Yup.string()
     .required("Name is required")
     .min(1, "Name is too short")
