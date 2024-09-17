@@ -2,16 +2,16 @@ export const worker_columns = [
   {
     name: "First Name",
     selector: (row) => row.first_name,
-    sortable: true,
+    // sortable: true,
   },
   {
     name: "Last Name",
     selector: (row) => row.last_name,
-    sortable: true,
+    // sortable: true,
   },
   {
     name: "Phone No",
     selector: (row) => row.phone_number,
-    sortable: true,
+    // sortable: true,
   }
 ];
