@@ -19,7 +19,6 @@ export const transactionValidationSchema = Yup.object({
     .min(1, "Donation type is required")
     .max(50, "Donation type is too long"),
   mobile_number: Yup.string()
-    .required("Mobile number is required")
     .min(8, "Mobile number is too short")
     .max(20, "Mobile number is too long"),
   name: Yup.string()
@@ -35,7 +34,6 @@ export const transactionValidationSchema = Yup.object({
   area: Yup.string().max(20, "Area is too long"),
   complete_address: Yup.string().max(300, "Complete is too long"),
   gender: Yup.string()
-    .required("Gender is required")
     .oneOf(["male", "female"], "Gender is required"),
   box: Yup.string().uuid("Box ID is not valid").nullable(),
 });

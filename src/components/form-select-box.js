@@ -8,11 +8,12 @@ const FormSelectBox = ({
   touched,
   options,
   errors,
+  required = false,
   ...otherProps
 }) => {
   return (
     <>
-      <InputLabel name={name} label={label} />
+      <InputLabel name={name} label={label} required={required} />
       <SelectField id={name} name={name} options={options} {...otherProps} />
       <ErrorMessage error={errors?.[name]} touched={touched?.[name]} />
     </>

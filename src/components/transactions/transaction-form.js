@@ -28,12 +28,12 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
       await axiosInstance.post("/transaction/", values);
       toast.success("Transaction created successfully");
       resetForm();
-      router.refresh();
       router.push("/transactions");
+      router.refresh();
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
-          "Something went wrong while creating data..."
+        "Something went wrong while creating data..."
       );
     } finally {
       setSubmitting(false);
@@ -45,13 +45,13 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
       await axiosInstance.put(`/transaction/${id}/`, values);
       toast.success("Updated successfully");
       resetForm();
-      router.refresh();
       router.push("/transactions");
+      router.refresh();
     } catch (error) {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(
         getFirstError(error?.response?.data?.message) ||
-          "Something went wrong while Updating data..."
+        "Something went wrong while Updating data..."
       );
     } finally {
       setSubmitting(false);
@@ -90,6 +90,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
                 label="Name"
                 errors={errors}
                 touched={touched}
+                required={true}
               />
             </div>
             <div className="flex-1">
@@ -161,6 +162,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
                 name="donation_type"
                 options={Donation_Type_OPTIONS}
                 touched={touched}
+                required={true}
               />
             </div>
 
@@ -170,6 +172,7 @@ const TransactionForm = ({ initialValue = {}, id = null }) => {
                 label="Amount"
                 errors={errors}
                 touched={touched}
+                required={true}
               />
             </div>
           </div>

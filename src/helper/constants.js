@@ -21,5 +21,5 @@ export const Gender_OPTIONS = [
 export const Donation_Type_OPTIONS = [
   { label: "Zakat", value: "zakat" },
   { label: "Sadqa", value: "sadqa" },
-  { label: "Box", value: "box" },
+  // { label: "Box", value: "box" },
 ];

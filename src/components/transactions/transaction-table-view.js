@@ -66,7 +66,7 @@ const TransactionTableView = ({ data }) => {
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={handleConfirmDelete}
-        message="Are you sure you want to delete this box?"
+        message="Are you sure you want to delete this Transaction?"
       />
     </>
   );
