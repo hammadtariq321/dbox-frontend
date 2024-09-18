@@ -1,7 +1,7 @@
-import Select from "react-select";
+import AsyncSelect from "react-select/async";
 import { Field, useFormikContext } from "formik";
 
-const SelectField = ({ name, options, ...props }) => {
+const AsyncSelectField = ({ name, loadOptions, ...props }) => {
   const { setFieldValue } = useFormikContext();
 
   const customStyles = {
@@ -26,13 +26,14 @@ const SelectField = ({ name, options, ...props }) => {
   return (
     <Field name={name}>
       {({ field }) => (
-        <Select
+        <AsyncSelect
           styles={customStyles}
           className="text-xs mt-1"
           id={name}
-          options={options}
-          // defaultInputValue={field.value}
-          value={options.find((option) => option.value === field.value)}
+          cacheOptions
+          defaultOptions
+          loadOptions={typeof loadOptions === "function" ? loadOptions : () => []}
+          value={field.value ? { label: field.value, value: field.value } : null}
           onChange={(selectedOption) =>
             setFieldValue(name, selectedOption ? selectedOption.value : "")
           }
@@ -43,4 +44,4 @@ const SelectField = ({ name, options, ...props }) => {
   );
 };
 
-export default SelectField;
+export default AsyncSelectField;

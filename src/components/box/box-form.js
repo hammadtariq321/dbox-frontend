@@ -11,6 +11,8 @@ import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
 import { getFirstError } from "@/helper/utils";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import FormAsyncSelectBox from "../form-async-select-box";
 
 const BoxForm = ({ initialValue = {}, id = null }) => {
   const router = useRouter();
@@ -57,6 +59,25 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
     }
   };
 
+  const getWorkers = async () => {
+    try {
+      const res = await axiosInstance.get(
+        "/users/?user_type=worker&disable_pagination=true"
+      );
+      const data = res?.data;
+      return data.map((item) => ({
+        value: item.id,
+        label: item.first_name + " " + item.last_name,
+      }));
+    } catch (error) {
+      console.log("🚀 ~ getWorkers ~ error:", error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    getWorkers();
+  }, []);
   return (
     <Formik
       initialValues={id ? initialValue : boxInitialValues}
@@ -128,13 +149,25 @@ const BoxForm = ({ initialValue = {}, id = null }) => {
           </div>
 
           {/* Fourth Row */}
-          <div className="mb-2">
-            <FormInput
-              name="complete_address"
-              label="Complete Address"
-              errors={errors}
-              touched={touched}
-            />
+          <div className="flex gap-3 mb-2">
+            <div className="flex-1">
+              <FormInput
+                name="complete_address"
+                label="Complete Address"
+                errors={errors}
+                touched={touched}
+              />
+            </div>
+
+            <div className="flex-1">
+              <FormAsyncSelectBox
+                name="worker"
+                label="Worker"
+                errors={errors}
+                options={getWorkers}
+                touched={touched}
+              />
+            </div>
           </div>
 
           <div className="mb-2">

@@ -10,8 +10,8 @@ export const workerInitialValues = {
 export const workerValidationSchema = Yup.object({
   phone_number: Yup.string()
     .required("Mobile number is required")
-    .min(11, "Mobile number is too short")
-    .max(13, "Mobile number is too long"),
+    .min(8, "Mobile number is too short")
+    .max(20, "Mobile number is too long"),
   first_name: Yup.string()
     .required("First Name is required")
     .min(3, "Name is too short")
@@ -30,8 +30,8 @@ export const workerValidationSchema = Yup.object({
 export const workerValidationWithoutPasswordSchema = Yup.object({
   phone_number: Yup.string()
     .required("Mobile number is required")
-    .min(11, "Mobile number is too short")
-    .max(13, "Mobile number is too long"),
+    .min(8, "Mobile number is too short")
+    .max(20, "Mobile number is too long"),
   first_name: Yup.string()
     .required("First Name is required")
     .min(3, "Name is too short")

@@ -1,18 +1,13 @@
 "use client";
 import { Form, Formik } from "formik";
 import {
-  boxInitialValues,
-  boxValidationSchema,
   workerInitialValues,
   workerValidationSchema,
   workerValidationWithoutPasswordSchema,
 } from "./worker-form-config";
-import { BUTTON_VARIANT, Gender_OPTIONS } from "@/helper/constants";
+import { BUTTON_VARIANT } from "@/helper/constants";
 import Button from "../button";
-import InputLabel from "../input-label";
 import FormInput from "../form-input";
-import FormSelectBox from "../form-select-box";
-import FileInputField from "../file-input-field";
 import axiosInstance from "@/helper/axios";
 import { toast } from "sonner";
 import { getFirstError } from "@/helper/utils";
@@ -21,7 +16,6 @@ import { useRouter } from "next/navigation";
 const WorkerForm = ({ initialValue = {}, id = null }) => {
   const router = useRouter();
   const handleSubmit = async (values, { resetForm, setSubmitting }) => {
-    console.log("Form values:", values);
     try {
       await axiosInstance.post("/register/", values);
       toast.success("Worker created successfully");
@@ -31,7 +25,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
     } catch (error) {
       toast.error(
         getFirstError(error?.response?.data) ||
-          "Something went wrong while creating data..."
+        "Something went wrong while creating data..."
       );
     } finally {
       setSubmitting(false);
@@ -39,18 +33,17 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
   };
 
   const handleEdit = async (values, { resetForm, setSubmitting }) => {
-    alert("");
     try {
       await axiosInstance.put(`/users/${id}/`, values);
       toast.success("Worker updated successfully");
       resetForm();
-      router.refresh();
       router.push("/workers");
+      router.refresh();
     } catch (error) {
       console.log("🚀 ~ handleEdit ~ error:", error);
       toast.error(
         getFirstError(error?.response?.data?.message) ||
-          "Something went wrong while Updating data..."
+        "Something went wrong while Updating data..."
       );
     } finally {
       setSubmitting(false);
@@ -76,6 +69,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
                 label="First Name"
                 errors={errors}
                 touched={touched}
+                required={true}
               />
             </div>
             <div className="flex-1">
@@ -84,6 +78,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
                 label="Last Name"
                 errors={errors}
                 touched={touched}
+                required={true}
               />
             </div>
           </div>
@@ -95,6 +90,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
                 label="Phone No"
                 errors={errors}
                 touched={touched}
+                required={true}
               />
             </div>
             <div className="flex-1">
@@ -104,6 +100,7 @@ const WorkerForm = ({ initialValue = {}, id = null }) => {
                   label="Password"
                   errors={errors}
                   touched={touched}
+                  required={true}
                 />
               )}
             </div>
